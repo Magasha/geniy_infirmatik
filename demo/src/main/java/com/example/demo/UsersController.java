@@ -49,7 +49,7 @@ public class UsersController
         return ResponseEntity.noContent().build();
     }
 
-    //curl -X  GET   http://localhost:8080/users
+    //curl -X  GET   http://localhost:8080/users/0
     @GetMapping("users/{index}")
     public ResponseEntity<User> getUser(@PathVariable("index") Integer index)
     {
