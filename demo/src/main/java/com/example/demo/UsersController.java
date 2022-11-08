@@ -62,7 +62,7 @@ public class UsersController
     {
         String name = users.get(i).name;
         users.remove((int) i);
-        users.add(new User(name, age));
+        users.add(i, new User(name, age));
         return ResponseEntity.accepted().build();
     }
 }
