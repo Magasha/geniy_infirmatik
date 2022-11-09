@@ -33,10 +33,11 @@ public class UsersController
     }*/
 
     //curl -X POST -H "Content-Type: application/json" -d URAPOBEDAAAAAAAAAAAAAAAAAAAA -d 239  http://localhost:8080/users
+    //curl -X POST -H "Content-Type: application/json" -d '{"name":"Masha", "age":16}'  http://localhost:8080/users
     @PostMapping("users")
-    public ResponseEntity<Void> addUser(@RequestBody String base)
+    public ResponseEntity<Void> addUser(@RequestBody User user)
     {
-        users.add(new User(base));
+        users.add(user);
         // new User(base.split("&")[0],base.split("&")[1]));
         return ResponseEntity.accepted().build();
     }
