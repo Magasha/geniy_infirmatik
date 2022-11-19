@@ -6,7 +6,7 @@ public class Theme {
     String name;
     ArrayList<String> comments;
 
-    User user;
+    ArrayList<User> users;
 
     public Theme()
     {
@@ -15,11 +15,11 @@ public class Theme {
     public Theme(String name, String comment, User user)
     {
         this.name = name;
-        this.comments.add(comment);
+        this.users.add(user);
         Theme theme = new Theme();
         theme.setName(name);
-        theme.comments.add(comment);
-        user.comments.add(theme);
+        this.users.get(0).themes.add(theme);
+        this.users.get(0).themes.get(0).comments.add(comment);
     }
 
     public ArrayList<String> getComment()

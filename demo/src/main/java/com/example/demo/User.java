@@ -7,7 +7,7 @@ public class User
     String name;
     int age;
 
-    ArrayList<Theme> comments;
+    ArrayList<Theme> themes;
 
     public User()
     {

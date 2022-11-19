@@ -11,15 +11,40 @@ import java.util.List;
 public class ThemeController {
 
     private List<Theme> themes = new ArrayList<>();
-
+    private List<User> users = new ArrayList<>();
     //на 3
 
-    //curl -X POST 'http://localhost:8080/themes/' -H 'Content-Type: application/json' --data-raw '{"name":"name", "comment": ["comment1"],
-    // "user": "name": "Mary", "age": "16"}'
+    //curl -X POST 'http://localhost:8080/themes/' -H 'Content-Type: application/json' --data-raw '{"name":"name", "comment": ["comment1"],"user": "name": "Mary", "age": "16"}'
     @PostMapping("themes")
     public ResponseEntity<Void> addTheme (@RequestBody Theme theme)
     {
-        themes.add(theme);
+        if (users.contains(theme.users.get(0))) {
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).equals(theme.users.get(0))) {
+                    if (users.get(i).themes.contains(theme)) {
+                        for (int j = 0; j < users.get(i).themes.size(); j++) {
+                            if (users.get(i).themes.get(j).equals(theme)) {
+                                users.get(i).themes.get(j).comments.addAll(theme.comments);
+                            }
+                        }
+                    }
+
+                }
+                else
+                    users.get(i).themes.add(theme);
+            }
+        }
+        else
+            users.add(theme.users.get(0));
+        if(themes.contains(theme))
+            for (int i = 0; i < themes.size(); i++)
+            {
+                if(themes.get(i).equals(theme))
+                    themes.get(i).comments.addAll(theme.comments);
+
+            }
+        else
+            themes.add(theme);
         return ResponseEntity.accepted().build();
     }
 
@@ -102,4 +127,7 @@ public class ThemeController {
     {
         return ResponseEntity.ok(themes.get(index - 1).getComment());
     }
+
+    //
+
 }

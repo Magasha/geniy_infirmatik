@@ -2,9 +2,9 @@ package com.example.demo;
 
 public class Contact
 {
-    private  String name;
-    private int number;
-    private String email;
+    String name;
+    int number;
+    String email;
 
     public Contact(String name, int number, String email) {
         this.name = name;

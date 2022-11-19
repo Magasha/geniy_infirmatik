@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactController
 {
     private final List<Contact> contacts = new ArrayList<>();
-    // curl -X POST -H "Content-Type: application/json" -d "{\"name/":/"Masha/", /"number/":/"88005553535/", /"email/" = /"aaaaaabbbbbb/"}" http://localhost:8080/contacts
+    // curl -X POST -H "Content-Type: application/json" -d "{"name":"Masha", "number":"239", "email" : "aaaaaabbbbbb"}" http://localhost:8080/contacts
     @PostMapping("contacts")
     public ResponseEntity<Void> addContact(@RequestBody Contact contact)
     {
@@ -41,7 +41,7 @@ public class ContactController
         return ResponseEntity.ok(contacts.get(index));
     }
 
-    // curl -X PUT -H "Content-Type: application/json" -d "{\"name/":/"Masha/", /"number/":/"88005553535/", /"email/" = /"aaaaaabbbbbb/"}" http://localhost:8080/contacts/0
+    // curl -X PUT -H "Content-Type: application/json" -d "{"name":"Masha", "number":"239", "email" : "aaaaaabbbbbb"}" http://localhost:8080/contacts/0
     @PutMapping("contacts/{index}")
     public ResponseEntity<Void> updateContact(@PathVariable("index") Integer i, @RequestBody Contact contact)
     {
@@ -49,4 +49,83 @@ public class ContactController
         contacts.add(i, contact);
         return ResponseEntity.accepted().build();
     }
+
+    // curl -X GET http://localhost:8080/contacts/
+    @GetMapping("contacts/{num}")
+    public ResponseEntity<Contact> searchContact(@RequestBody Integer num)
+    {
+        for (Contact contact : contacts) {
+            if (contact.email.contains(num.toString()) || (contact.number + "").contains(num.toString()))
+                ResponseEntity.ok(contact);
+        }
+        return ResponseEntity.accepted().build();
+    }
+
+    /*//curl -X GET 'http://localhost:8080/contacts/get/1'
+    @GetMapping("contacts/get/{text}")
+        public ResponseEntity<List<Contacts» getTextContacts("text" String text)
+    {
+        final List<Contacts> temp = new ArrayList<>();
+        for (Contacts c: contacts)
+        {
+            if((c.name+" "+c.number+" "+c.email).contains(text))
+                temp.add(c);
+        }
+        return ResponseEntity.ok(temp);
+    }
+
+    //curl -X GET 'http://localhost:8080/contacts/sort/number'
+    //curl -X GET 'http://localhost:8080/contacts/sort/name'
+    //curl -X GET 'http://localhost:8080/contacts/sort/email'
+    @GetMapping("contacts/sort/{text}")
+    public ResponseEntity<List<Contacts» sortContacts("text" String text)
+    {
+    ArrayList temp = (ArrayList) contacts;
+    switch (text) {
+        case "name":
+            Collections.sort(temp, new NameComparator());
+            break;
+        case "number":
+            Collections.sort(temp, new NumberComparator());
+            break;
+        case "email":
+            Collections.sort(temp, new EmailComparator());
+            break;
+        }
+        return ResponseEntity.ok(temp);
+    }
+
+    class NameComparator implements Comparator<Contacts>
+    {
+        public int compare(Contacts a, Contacts b)
+        {
+            return a.name.compareToIgnoreCase(b.name);
+        }
+    }
+
+    class NumberComparator implements Comparator<Contacts>
+    {
+        public int compare(Contacts a, Contacts b)
+        {
+            return Integer.compare(a.number, b.number);
+        }
+    }
+
+    class EmailComparator implements Comparator<Contacts>
+    {
+        public int compare(Contacts a, Contacts b)
+        {
+            return a.email.compareToIgnoreCase(b.email);
+        }
+    }
+
+    /curl -X GET 'http://localhost:8080/contacts/page/0' -H 'Content-Type: application/json' -data-raw '2'
+    @GetMapping("contacts/page/{index}")
+    public ResponseEntity<List<Contacts» pagingContacts(@RequestBody Integer limit, "index" Integer index)
+    {
+    final List<Contacts> temp = contacts.subList(index, Math.min(index+limit, contacts.size()-1));
+    if (limit <= 0 || index < 0)
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    return ResponseEntity.ok(temp);
+    }*/
 }
