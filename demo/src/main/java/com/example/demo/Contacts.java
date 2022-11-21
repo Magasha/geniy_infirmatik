@@ -1,12 +1,12 @@
 package com.example.demo;
 
-public class Contact
+public class Contacts
 {
     String name;
     int number;
     String email;
 
-    public Contact(String name, int number, String email) {
+    public Contacts(String name, int number, String email) {
         this.name = name;
         this.number = number;
         this.email = email;
@@ -14,7 +14,7 @@ public class Contact
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "Contacts{" +
                 "nameT='" + name + '\'' +
                 ", number=" + number +
                 ", email='" + email + '\'' +
