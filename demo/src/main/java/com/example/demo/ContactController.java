@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactController
 {
     private final List<Contact> contacts = new ArrayList<>();
-    // curl -X POST -H "Content-Type: application/json" -d "{"name":"Masha", "number":"239", "email" : "aaaaaabbbbbb"}" http://localhost:8080/contacts
+    // curl -X POST -H "Content-Type: application/json" -d "{"nameT":"Masha", "number":"239", "email" : "aaaaaabbbbbb"}" http://localhost:8080/contacts
     @PostMapping("contacts")
     public ResponseEntity<Void> addContact(@RequestBody Contact contact)
     {
@@ -41,7 +41,7 @@ public class ContactController
         return ResponseEntity.ok(contacts.get(index));
     }
 
-    // curl -X PUT -H "Content-Type: application/json" -d "{"name":"Masha", "number":"239", "email" : "aaaaaabbbbbb"}" http://localhost:8080/contacts/0
+    // curl -X PUT -H "Content-Type: application/json" -d "{"nameT":"Masha", "number":"239", "email" : "aaaaaabbbbbb"}" http://localhost:8080/contacts/0
     @PutMapping("contacts/{index}")
     public ResponseEntity<Void> updateContact(@PathVariable("index") Integer i, @RequestBody Contact contact)
     {
@@ -68,7 +68,7 @@ public class ContactController
         final List<Contacts> temp = new ArrayList<>();
         for (Contacts c: contacts)
         {
-            if((c.name+" "+c.number+" "+c.email).contains(text))
+            if((c.nameT+" "+c.number+" "+c.email).contains(text))
                 temp.add(c);
         }
         return ResponseEntity.ok(temp);
@@ -82,7 +82,7 @@ public class ContactController
     {
     ArrayList temp = (ArrayList) contacts;
     switch (text) {
-        case "name":
+        case "nameT":
             Collections.sort(temp, new NameComparator());
             break;
         case "number":
@@ -99,7 +99,7 @@ public class ContactController
     {
         public int compare(Contacts a, Contacts b)
         {
-            return a.name.compareToIgnoreCase(b.name);
+            return a.nameT.compareToIgnoreCase(b.nameT);
         }
     }
 

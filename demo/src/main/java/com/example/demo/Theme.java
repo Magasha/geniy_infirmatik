@@ -3,23 +3,18 @@ package com.example.demo;
 import java.util.ArrayList;
 
 public class Theme {
-    String name;
-    ArrayList<String> comments;
+    String nameT;
+    ArrayList<String> comments = new ArrayList<>();
+    ArrayList<Integer> indexT = new ArrayList<>();
 
-    ArrayList<User> users;
-
-    public Theme()
+//public Theme()
+//{
+//
+//}
+    public Theme(String nameT, ArrayList<String> comment)
     {
-    }
-
-    public Theme(String name, String comment, User user)
-    {
-        this.name = name;
-        this.users.add(user);
-        Theme theme = new Theme();
-        theme.setName(name);
-        this.users.get(0).themes.add(theme);
-        this.users.get(0).themes.get(0).comments.add(comment);
+        this.nameT = nameT;
+        this.comments.addAll(comment);
     }
 
     public ArrayList<String> getComment()
@@ -32,14 +27,14 @@ public class Theme {
         this.comments = comment;
     }
 
-    public String getName()
+    public String getNameT()
     {
-        return name;
+        return nameT;
     }
 
-    public void setName(String name)
+    public void setNameT(String nameT)
     {
-        this.name = name;
+        this.nameT = nameT;
     }
 }
 

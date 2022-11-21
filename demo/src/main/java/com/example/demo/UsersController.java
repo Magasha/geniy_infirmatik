@@ -20,20 +20,20 @@ public class UsersController
 
     //curl -X  POST  -d Toha  http://localhost:8080/users/add/416
     /*@PostMapping("users/add/{age}")
-    public ResponseEntity<Void> addUser(@PathVariable("age") Integer age, @RequestBody String name)
+    public ResponseEntity<Void> addUser(@PathVariable("age") Integer age, @RequestBody String nameT)
     {
         String basa [] = data.split("/");
-        String name = basa[0];
+        String nameT = basa[0];
         int age = Integer.parseInt(basa[1]);
         users.add("User{" +
-                "name='" + name + '\'' +
+                "nameT='" + nameT + '\'' +
                 ", age=" + age +
                 '}');
         return ResponseEntity.accepted().build();
     }*/
 
     //curl -X POST -H "Content-Type: application/json" -d URAPOBEDAAAAAAAAAAAAAAAAAAAA -d 239  http://localhost:8080/users
-    //curl -X POST -H "Content-Type: application/json" -d '{"name":"Masha", "age":16}'  http://localhost:8080/users
+    //curl -X POST -H "Content-Type: application/json" -d '{"nameT":"Masha", "age":16}'  http://localhost:8080/users
     @PostMapping("users")
     public ResponseEntity<Void> addUser(@RequestBody User user)
     {
@@ -61,7 +61,7 @@ public class UsersController
     @PutMapping("users/{index}")
     public ResponseEntity<Void> updateAge(@PathVariable("index") Integer i, @RequestBody Integer age)
     {
-        String name = users.get(i).name;
+        String name = users.get(i).nameU;
         users.remove((int) i);
         users.add(i, new User(name, age));
         return ResponseEntity.accepted().build();

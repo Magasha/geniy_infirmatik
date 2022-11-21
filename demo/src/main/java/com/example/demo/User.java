@@ -1,34 +1,30 @@
 package com.example.demo;
 
-import java.util.ArrayList;
-
 public class User
 {
-    String name;
+    String nameU;
     int age;
-
-    ArrayList<Theme> themes;
 
     public User()
     {
         this.age = 16;
-        this.name = "Mary";
+        this.nameU = "Mary";
     }
 
-    public User(String name, int age)
+    public User(String nameU, int age)
     {
         this.age = age;
-        this.name = name;
+        this.nameU = nameU;
     }
 
-    public String getName()
+    public String getNameU()
     {
-        return name;
+        return nameU;
     }
 
-    public void setName(String name)
+    public void setNameU(String nameU)
     {
-        this.name = name;
+        this.nameU = nameU;
     }
 
     public int getAge()
@@ -44,7 +40,7 @@ public class User
     @Override
     public String toString()
     {
-        return name + " " + age;
+        return nameU + " " + age;
     }
 }
 
